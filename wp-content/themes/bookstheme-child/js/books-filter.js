@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const genre = genreFilter.value;
         const publisher = publisherFilter.value;
 
-
+        // Fetch books with the selected filters
         axios.get(booksFilter.rest_url, {
             params: {
                 genre: genre,
@@ -24,13 +24,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 let html = '';
                 books.forEach(function (book) {
+                    // Create links for title, author, publisher, and genre
                     html += `
-                        <div class="book-item">
-                            <h2>${book.title}</h2>
-                            <p>Author: ${book.author}</p>
-                            <p>Price: $${book.price}</p>
-                            <p>Release Date: ${book.release_date}</p>
-                        </div>
+                         <div class="book-item">
+                        <h2><a href="${book.permalink}">${book.title}</a></h2>
+                        <p>Author: ${book.author}</p>
+                        <p>Price: $${book.price}</p>
+                        <p>Release Date: ${book.release_date}</p>
+                        <p>Genre: ${book.genres}</p>
+                        <p>Publisher: ${book.publishers}</p>
+                    </div>
+                    </div>
                     `;
                 });
 
@@ -41,10 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-
+    // Fetch books initially on page load
     fetchBooks();
 
-
+    // Re-fetch books when filters change
     genreFilter.addEventListener('change', fetchBooks);
     publisherFilter.addEventListener('change', fetchBooks);
 });

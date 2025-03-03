@@ -8,6 +8,9 @@ require get_stylesheet_directory() . '/inc/class-books-post-type.php';
 require get_stylesheet_directory() . '/inc/class-books-taxonomies.php';
 require get_stylesheet_directory() . '/inc/class-books-rest-api.php';
 require get_stylesheet_directory() . '/inc/class-books-enqueue.php';
+require get_stylesheet_directory() . '/inc/class-books-search.php';
+require get_stylesheet_directory() . '/inc/class-shortcode-add-book.php';
+
 
 function bookstheme_child_init_classes(): void
 {
@@ -18,13 +21,9 @@ function bookstheme_child_init_classes(): void
     new Books_Taxonomies();
     new Books_REST_API();
     new Books_Enqueue();
+    new Books_Search();
+    new Shortcode_Add_Book();
 
 }
 add_action('after_setup_theme', 'bookstheme_child_init_classes');
-
-
-
-
-
-
 
