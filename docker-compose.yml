@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: codeflex_wp
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8880:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: codeflex
+      WORDPRESS_DB_USER: coa
+      WORDPRESS_DB_PASSWORD: coa
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+
+  db:
+    image: mysql:5.7
+    container_name: codeflex_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: codeflex
+      MYSQL_USER: coa
+      MYSQL_PASSWORD: coa
+    ports:
+      - "3386:3386"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: codeflex_phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpass
+
+volumes:
+  db_data:
