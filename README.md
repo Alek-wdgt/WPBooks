@@ -1,6 +1,7 @@
 
 # WPBooks Readme
 WP functions to create custom books with genre, publisher, author, price and release date, with advanced search to include acf+cpt datas and on page axios filter + REST API. Admin and editors can add books from landing page.
+App is not secure, its demo only
 
 ✅ Custom Post Type: books
 ✅ Custom Taxonomies: genre, publisher
